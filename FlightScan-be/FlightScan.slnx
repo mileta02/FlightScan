@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="FlightScan.Api/FlightScan.Api.csproj" />
+  <Project Path="FlightScan.Application/FlightScan.Application.csproj" />
+  <Project Path="FlightScan.Core/FlightScan.Core.csproj" />
+  <Project Path="FlightScan.Infrastructure/FlightScan.Infrastructure.csproj" />
+  <Project Path="FlightScan.Tests/FlightScan.Tests.csproj" />
+</Solution>
