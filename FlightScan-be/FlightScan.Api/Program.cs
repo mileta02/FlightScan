@@ -1,4 +1,12 @@
+using FlightScan.Application.Behaviours;
+using FlightScan.Application.Cqrs.Commands.Auth;
+using FlightScan.Application.Handlers.Auth;
+using FlightScan.Core.Interfaces;
+using FlightScan.Infrastructure.Data;
 using FlightScan.Infrastructure.Data.Context;
+using FlightScan.Infrastructure.Data.Repository;
+using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +16,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginHandler).Assembly));
+
+// FluentValidation Pipeline Behavior
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddValidatorsFromAssembly(typeof(LoginCommand).Assembly);
+
+// Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
