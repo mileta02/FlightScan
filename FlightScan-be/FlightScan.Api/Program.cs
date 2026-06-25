@@ -1,6 +1,7 @@
 using FlightScan.Application.Behaviours;
 using FlightScan.Application.Cqrs.Commands.Auth;
 using FlightScan.Application.Handlers.Auth;
+using FlightScan.Api.Middlewares;
 using FlightScan.Core.Interfaces;
 using FlightScan.Infrastructure.Data;
 using FlightScan.Infrastructure.Data.Context;
@@ -38,6 +39,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     ));
 
 var app = builder.Build();
+
+// Middlewares
+app.UseMiddleware<ErrorMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
