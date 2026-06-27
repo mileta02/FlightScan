@@ -13,9 +13,9 @@ namespace FlightScan.Infrastructure.Data.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<User?> GetByUsernameAsync(string username)
+        public async Task<User?> GetByUsernameAndPasswordAsync(string username, string password)
         { 
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
         } 
     }
 }
