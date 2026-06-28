@@ -14,10 +14,34 @@ namespace FlightScan.Infrastructure.Data.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<Reservation?> GetByIdAsync(int id) =>
-            await _dbContext.Reservations
+        public async Task<Reservation?> GetByIdAsync(int id)
+        {
+            return await _dbContext.Reservations
                 .Include(r => r.Flight)
                 .Include(r => r.User)
                 .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<(List<Reservation> Items, int TotalCount)> GetByUserIdAsync(int userId, int pageIndex, int pageSize)
+        {
+            var query = _dbContext.Reservations
+                .Include(r => r.Flight)
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.CreatedAt);
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalCount);
+        }
+
+        public async Task CreateAsync(Reservation reservation)
+        {
+            await _dbContext.Reservations.AddAsync(reservation);
+        }
     }
 }

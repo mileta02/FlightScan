@@ -28,5 +28,8 @@
         public const string reservationIdInvalid = "Invalid reservation ID.";
         public const string reservationNotFound = "Reservation with provided ID does not exist.";
 
+        // CreateReservationCommand messages
+        public const string seatsCountInvalid = "Number of seats must be greater than 0.";
+
     }
 }
