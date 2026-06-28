@@ -4,6 +4,7 @@ namespace FlightScan.Core.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User?> GetByUsernameAndPasswordAsync(string username, string password);
+        Task<User?> GetByUsernameAsync(string username);
+        Task CreateAsync(User user);
     }
 }

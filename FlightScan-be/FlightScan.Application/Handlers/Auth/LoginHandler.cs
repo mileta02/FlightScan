@@ -19,9 +19,9 @@ namespace FlightScan.Application.Handlers.Auth
 
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByUsernameAndPasswordAsync(request.Username!, request.Password!);
+            var user = await _userRepository.GetByUsernameAsync(request.Username!);
 
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password!, user.Password))
                 throw new UnauthorizedException("Invalid username or password.");
 
             var token = _jwtService.GenerateToken(user);
