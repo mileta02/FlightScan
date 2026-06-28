@@ -7,5 +7,6 @@ namespace FlightScan.Core.Interfaces
     {
         Task<(List<Flight> Items, int TotalCount)> GetAllAsync(FlightSpecParams specParams);
         Task<Flight?> GetByIdAsync(int id);
+        Task CreateAsync(Flight flight);
     }
 }

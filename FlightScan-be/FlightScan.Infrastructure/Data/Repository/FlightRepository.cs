@@ -49,5 +49,10 @@ namespace FlightScan.Infrastructure.Data.Repository
         {
             return await _dbContext.Flights.FirstOrDefaultAsync(f => f.Id == id);
         }
+
+        public async Task CreateAsync(Flight flight)
+        {
+            await _dbContext.Flights.AddAsync(flight);
+        }
     }
 }

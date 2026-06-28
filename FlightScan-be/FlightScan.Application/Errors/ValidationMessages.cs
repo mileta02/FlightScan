@@ -17,5 +17,16 @@
         public const string flightIdInvalid = "Invalid flight ID.";
         public const string flightNotFound = "Flight with provided ID does not exist.";
 
+        // CreateFlightCommand messages
+        public const string cityInvalid = "Invalid city.";
+        public const string sameCityInvalid = "Origin and destination city cannot be same.";
+        public const string stopsInvalid = "Number of stops cannot be negative.";
+        public const string departureDateInvalid = "Departure date must be in the future.";
+        public const string totalSeatsInvalid = "Total seats must be greater than 0.";
+
+        // ApproveReservationCommand messages
+        public const string reservationIdInvalid = "Invalid reservation ID.";
+        public const string reservationNotFound = "Reservation with provided ID does not exist.";
+
     }
 }

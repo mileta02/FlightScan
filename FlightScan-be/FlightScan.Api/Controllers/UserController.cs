@@ -18,7 +18,7 @@ namespace FlightScan.Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
@@ -26,7 +26,7 @@ namespace FlightScan.Api.Controllers
         public async Task<ActionResult<CreateResponse>> CreateUserAsync([FromBody] CreateUserCommand request)
         {
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return StatusCode(StatusCodes.Status201Created, result);
         }
     }
 }

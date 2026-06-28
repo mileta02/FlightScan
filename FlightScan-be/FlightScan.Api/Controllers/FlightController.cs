@@ -1,6 +1,7 @@
 using FlightScan.Application.Cqrs.Commands.Flight;
 using FlightScan.Application.Cqrs.Queries.Flight;
 using FlightScan.Core.Helpers;
+using FlightScan.Core.Responses.Common;
 using FlightScan.Core.Responses.Flights;
 using FlightScan.Core.Specifications;
 using MediatR;
@@ -19,6 +20,19 @@ namespace FlightScan.Api.Controllers
         public FlightController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Agent")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CreateResponse>> CreateFlightAsync([FromBody] CreateFlightCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return StatusCode(StatusCodes.Status201Created, result);
         }
 
         [HttpGet]
