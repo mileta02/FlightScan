@@ -21,6 +21,7 @@ namespace FlightScan.Application.Cqrs.Commands.User
         {
             _userRepository = userRepository;
 
+            ClassLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.Username)
                 .NotEmpty().WithMessage(ValidationMessages.usernameRequired)
                 .MinimumLength(8).WithMessage(ValidationMessages.usernameMinChars)

@@ -53,6 +53,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(LoginCommand).Assembly);
 
 // Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 
 // UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

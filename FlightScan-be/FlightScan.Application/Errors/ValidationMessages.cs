@@ -13,5 +13,9 @@
         public const string roleInvalid = "Invalid role provided.";
         public const string administratorRoleInvalid = "Cannot create user with administrator role.";
 
+        // CancelFlightCommand messages
+        public const string flightIdInvalid = "Invalid flight ID.";
+        public const string flightNotFound = "Flight with provided ID does not exist.";
+
     }
 }
