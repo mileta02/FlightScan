@@ -36,7 +36,7 @@ export default function FlightsTable({ flights = [], onCancel, lowSeatThreshold 
             {flights.map((f) => {
               const low = !f.canceled && f.free < lowSeatThreshold
               return (
-                <tr key={f.id} className={f.canceled ? styles.rowCanceled : low ? styles.rowLow : ''}>
+                <tr key={f.id} className={isAdmin ? '' : f.canceled ? styles.rowCanceled : low ? styles.rowLow : ''}>
                   <td className={`${styles.td} ${styles.tdMono}`}>{f.num}</td>
                   <td className={styles.td}>
                     <div className={styles.routeCodes}>
@@ -49,7 +49,7 @@ export default function FlightsTable({ flights = [], onCancel, lowSeatThreshold 
                   <td className={styles.td}>{formatDate(f.date)}</td>
                   <td className={`${styles.td} ${styles.hideOnMobile}`}>{stopsLabel(f.stops)}</td>
                   <td className={styles.td}>
-                    <span className={`${styles.seats} ${f.canceled ? styles.seatsCanceled : low ? styles.seatsLow : ''}`}>
+                    <span className={`${styles.seats} ${isAdmin ? '' : f.canceled ? styles.seatsCanceled : low ? styles.seatsLow : ''}`}>
                       {f.free}
                     </span>
                     <span className={styles.seatsTotal}> / {f.total}</span>

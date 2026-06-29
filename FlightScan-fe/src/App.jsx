@@ -15,6 +15,14 @@ function RequireAuth() {
   return auth ? <Outlet /> : <Navigate to="/login" replace />
 }
 
+function RequireRole({ allowed }) {
+  const { auth } = useAuth()
+  const role = auth?.role?.toLowerCase() ?? 'visitor'
+  return allowed.includes(role)
+    ? <Outlet />
+    : <Navigate to={`/dashboard/${DEFAULT_BY_ROLE[role] ?? 'search'}`} replace />
+}
+
 function DashboardIndex() {
   const { auth } = useAuth()
   const role = auth?.role?.toLowerCase() ?? 'visitor'
@@ -31,11 +39,23 @@ export default function App() {
           <Route element={<RequireAuth />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DashboardIndex />} />
-              <Route path="flights" element={<FlightsPage />} />
-              <Route path="reservations" element={<ReservationsPage />} />
-              <Route path="search" element={<SearchPage />} />
-              <Route path="myreservations" element={<MyReservationsPage />} />
-              <Route path="users" element={<UsersPage />} />
+
+              <Route element={<RequireRole allowed={['administrator', 'agent']} />}>
+                <Route path="flights" element={<FlightsPage />} />
+              </Route>
+
+              <Route element={<RequireRole allowed={['agent']} />}>
+                <Route path="reservations" element={<ReservationsPage />} />
+              </Route>
+
+              <Route element={<RequireRole allowed={['visitor']} />}>
+                <Route path="search" element={<SearchPage />} />
+                <Route path="myreservations" element={<MyReservationsPage />} />
+              </Route>
+
+              <Route element={<RequireRole allowed={['administrator']} />}>
+                <Route path="users" element={<UsersPage />} />
+              </Route>
             </Route>
           </Route>
 
