@@ -1,0 +1,37 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 64rem) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 36rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.state {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  color: #7E94B4;
+  font-size: 0.9375rem;
+  border: 1.5px dashed #D0DAE8;
+  border-radius: 0.875rem;
+}
+
+.stateError {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #FEECEC;
+  color: #C0322B;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}

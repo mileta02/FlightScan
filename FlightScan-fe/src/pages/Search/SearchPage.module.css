@@ -1,14 +1,65 @@
-.emptyState {
+.resultsHeader {
   margin-top: 1.5rem;
-  padding: 2rem;
-  text-align: center;
+  font-size: 0.8125rem;
   color: #7E94B4;
-  font-size: 0.9375rem;
-  border: 1.5px dashed #D0DAE8;
-  border-radius: 0.875rem;
+  font-weight: 500;
 }
 
-.emptyState strong {
-  color: #FF6A3D;
+.resultsHeader strong {
+  color: #0E9F6E;
   font-weight: 700;
+}
+
+.grid {
+  margin-top: 0.875rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 64rem) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 36rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filterCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: #3A4A63;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filterCheck input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #FF6A3D;
+  cursor: pointer;
+}
+
+.errorState {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #FEECEC;
+  color: #C0322B;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.emptyState {
+  margin-top: 1rem;
+  text-align: center;
+  color: #A0ADBF;
+  font-size: 0.8125rem;
 }

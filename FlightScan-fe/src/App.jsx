@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import LoginPage from './pages/Login/LoginPage'
 import DashboardLayout from './layouts/DashboardLayout'
 import SearchPage from './pages/Search/SearchPage'
+import MyReservationsPage from './pages/MyReservations/MyReservationsPage'
 
 const DEFAULT_BY_ROLE = { agent: 'flights', visitor: 'search', administrator: 'flights' }
 
@@ -30,7 +31,7 @@ export default function App() {
               <Route path="flights" element={<div></div>} />
               <Route path="reservations" element={<div></div>} />
               <Route path="search" element={<SearchPage />} />
-              <Route path="myreservations" element={<div></div>} />
+              <Route path="myreservations" element={<MyReservationsPage />} />
               <Route path="users" element={<div></div>} />
             </Route>
           </Route>

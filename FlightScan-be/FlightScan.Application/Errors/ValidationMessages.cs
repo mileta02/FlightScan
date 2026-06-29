@@ -23,6 +23,7 @@
         public const string stopsInvalid = "Number of stops cannot be negative.";
         public const string departureDateInvalid = "Departure date must be in the future.";
         public const string totalSeatsInvalid = "Total seats must be greater than 0.";
+        public const string sameFlightExists = "Flight with same route and date already exists.";
 
         // ApproveReservationCommand messages
         public const string reservationIdInvalid = "Invalid reservation ID.";
@@ -30,6 +31,7 @@
 
         // CreateReservationCommand messages
         public const string seatsCountInvalid = "Number of seats must be greater than 0.";
+        public const string alreadyReserved = "Reservation for this flight has already been made.";
 
     }
 }

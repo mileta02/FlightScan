@@ -1,5 +1,6 @@
 using FlightScan.Application.Errors;
 using FlightScan.Core.Enums;
+using FlightScan.Core.Interfaces;
 using FlightScan.Core.Responses.Common;
 using FluentValidation;
 using MediatR;
@@ -17,8 +18,12 @@ namespace FlightScan.Application.Cqrs.Commands.Flight
 
     public class CreateFlightCommandValidator : AbstractValidator<CreateFlightCommand>
     {
-        public CreateFlightCommandValidator()
+        private readonly IFlightRepository _flightRepository;
+
+        public CreateFlightCommandValidator(IFlightRepository flightRepository)
         {
+            _flightRepository = flightRepository;
+
             ClassLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.WhereFrom)
                 .IsInEnum().WithMessage(ValidationMessages.cityInvalid);
@@ -35,6 +40,14 @@ namespace FlightScan.Application.Cqrs.Commands.Flight
 
             RuleFor(x => x.TotalSeats)
                 .GreaterThan(0).WithMessage(ValidationMessages.totalSeatsInvalid);
+
+            RuleFor(x => x)
+                .MustAsync(async (cmd, ct) =>
+                {
+                    var exists = await _flightRepository.ExistsAsync(cmd.WhereFrom, cmd.WhereTo, cmd.DepartureDate);
+                    return !exists;
+                })
+                .WithMessage(ValidationMessages.sameFlightExists);
         }
     }
 }

@@ -6,17 +6,11 @@ const DEFAULT_CITIES = ['Beograd', 'Niš', 'Kraljevo']
 function validate(value) {
   if (!value.from || !value.to) return 'Grad polaska i dolaska su obavezni.'
   if (value.from === value.to) return 'Grad polaska i dolaska ne mogu biti isti.'
-  if (value.date) {
-    const selected = new Date(value.date)
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    if (selected < today) return 'Datum ne može biti u prošlosti.'
-  }
   return null
 }
 
 export default function FlightSearch({
-  value = { from: '', to: '', date: '', directOnly: false },
+  value = { from: '', to: '' },
   onChange = () => {},
   onSearch = () => {},
   cities = DEFAULT_CITIES,
@@ -57,31 +51,12 @@ export default function FlightSearch({
           </select>
         </div>
 
-        <div className={styles.field}>
-          <label className={styles.label}>Datum (opciono)</label>
-          <input
-            type="date"
-            className={styles.dateInput}
-            value={value.date}
-            onChange={(e) => onChange({ date: e.target.value })}
-          />
-        </div>
-
         <button className={styles.searchBtn} onClick={handleSearch}>
           Pretraži
         </button>
       </div>
 
       {error && <div className={styles.errorBox}>{error}</div>}
-
-      <label className={styles.checkLabel}>
-        <input
-          type="checkbox"
-          checked={value.directOnly}
-          onChange={(e) => onChange({ directOnly: e.target.checked })}
-        />
-        Samo letovi bez presedanja
-      </label>
     </div>
   )
 }

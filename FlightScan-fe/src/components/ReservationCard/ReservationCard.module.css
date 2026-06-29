@@ -1,0 +1,64 @@
+.card {
+  background: #fff;
+  border: 1px solid #E5EAF2;
+  border-radius: 0.8125rem;
+  padding: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.flightNum {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: #8090A8;
+  letter-spacing: 0.03125rem;
+}
+
+.badgeApproved {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0E9F6E;
+}
+
+.badgePending {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FF6A3D;
+}
+
+.route {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F2240;
+}
+
+.cities {
+  font-size: 0.78125rem;
+  color: #8B98AC;
+  margin-bottom: 0.625rem;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: #54637C;
+  border-top: 1px solid #F0F3F8;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.seats {
+  font-weight: 700;
+  color: #0F2240;
+}

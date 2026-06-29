@@ -1,0 +1,125 @@
+.card {
+  background: #fff;
+  border: 1px solid #E5EAF2;
+  border-radius: 0.8125rem;
+  padding: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flightNum {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: #8090A8;
+  letter-spacing: 0.03125rem;
+}
+
+.badge {
+  background: #EEF2F7;
+  color: #54637C;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.1875rem 0.5625rem;
+  border-radius: 62.5rem;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.city {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.cityCode {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F2240;
+}
+
+.cityName {
+  font-size: 0.6875rem;
+  color: #8090A8;
+}
+
+.arrow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.line {
+  flex: 1;
+  height: 0.0625rem;
+  background: #E2E8F2;
+}
+
+.plane {
+  flex-shrink: 0;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: #54637C;
+  border-top: 1px solid #F0F3F8;
+  padding-top: 0.75rem;
+}
+
+.seatsOk {
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #0E9F6E;
+}
+
+.seatsLow {
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #E0552B;
+}
+
+.reserveBtn {
+  width: 100%;
+  background: #FF6A3D;
+  color: #fff;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 0.5625rem;
+  font-size: 0.84375rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 0.25rem 0.75rem rgba(255, 106, 61, 0.25);
+  transition: opacity 0.15s;
+}
+
+.reserveBtn:hover {
+  opacity: 0.88;
+}
+
+.blocked {
+  text-align: center;
+  font-size: 0.78125rem;
+  color: #B45309;
+  background: #FEF1DD;
+  padding: 0.625rem;
+  border-radius: 0.5625rem;
+  font-weight: 600;
+}

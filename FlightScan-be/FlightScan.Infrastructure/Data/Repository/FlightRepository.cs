@@ -1,4 +1,5 @@
 using FlightScan.Core.Entities;
+using FlightScan.Core.Enums;
 using FlightScan.Core.Interfaces;
 using FlightScan.Core.Specifications;
 using FlightScan.Infrastructure.Data.Context;
@@ -53,6 +54,14 @@ namespace FlightScan.Infrastructure.Data.Repository
         public async Task CreateAsync(Flight flight)
         {
             await _dbContext.Flights.AddAsync(flight);
+        }
+
+        public async Task<bool> ExistsAsync(City whereFrom, City whereTo, DateTime departureDate)
+        {
+            return await _dbContext.Flights.AnyAsync(f =>
+                f.WhereFrom == whereFrom &&
+                f.WhereTo == whereTo &&
+                f.DepartureDate.Date == departureDate.Date);
         }
     }
 }

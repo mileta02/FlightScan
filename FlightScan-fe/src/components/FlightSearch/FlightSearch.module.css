@@ -75,24 +75,6 @@
   font-weight: 500;
 }
 
-.checkLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  font-size: 0.84375rem;
-  color: #3A4A63;
-  cursor: pointer;
-  user-select: none;
-}
-
-.checkLabel input[type='checkbox'] {
-  width: 1rem;
-  height: 1rem;
-  accent-color: #FF6A3D;
-  cursor: pointer;
-}
-
 @media (max-width: 48rem) {
   .row {
     flex-direction: column;
