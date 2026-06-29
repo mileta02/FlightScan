@@ -1,0 +1,235 @@
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.leftPanel {
+  flex: 1 1 440px;
+  background: #0A1B33;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  padding: 40px;
+}
+
+.circle1 {
+  position: absolute;
+  right: -130px;
+  bottom: -130px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.circle2 {
+  position: absolute;
+  right: -50px;
+  top: -90px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: rgba(255, 106, 61, 0.07);
+  pointer-events: none;
+}
+
+.circle3 {
+  position: absolute;
+  left: -120px;
+  top: -120px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.logoWrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.logoIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: #FF6A3D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(255, 106, 61, 0.32);
+}
+
+.logoText {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+.rightPanel {
+  flex: 1 1 440px;
+  background: #F1F4F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  min-height: 260px;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 380px;
+  animation: fadeUp 0.4s ease;
+}
+
+.heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0F2240;
+  margin: 0 0 22px;
+}
+
+.fieldGroup {
+  margin-bottom: 14px;
+}
+
+.fieldGroupLast {
+  margin-bottom: 18px;
+}
+
+.label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #3A4A63;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1px solid #DCE3EF;
+  border-radius: 9px;
+  font-size: 14px;
+  font-family: 'Hanken Grotesk', sans-serif;
+  color: #0F2240;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #FF6A3D;
+}
+
+.errorBox {
+  background: #FEECEC;
+  color: #C0322B;
+  border-radius: 9px;
+  padding: 10px 13px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  background: #FF6A3D;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-weight: 700;
+  font-family: 'Hanken Grotesk', sans-serif;
+  cursor: pointer;
+  margin-top: 4px;
+  box-shadow: 0 8px 18px rgba(255, 106, 61, 0.28);
+  transition: opacity 0.15s;
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    background: #F1F4F9;
+    justify-content: center;
+  }
+
+  .leftPanel {
+    flex: none;
+    width: 100%;
+    min-height: unset;
+    background: #F1F4F9;
+    color: #0A1B33;
+    padding: 40px 24px 24px;
+    justify-content: center;
+  }
+
+  .circle1,
+  .circle2,
+  .circle3 {
+    display: none;
+  }
+
+  .logoWrap {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .logoIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .logoIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logoText {
+    font-size: 28px;
+    color: #0A1B33;
+  }
+
+  .rightPanel {
+    flex: none;
+    width: 100%;
+    background: #F1F4F9;
+    padding: 16px 24px 48px;
+    min-height: unset;
+    align-items: center;
+  }
+
+  .formCard {
+    max-width: 100%;
+  }
+}
