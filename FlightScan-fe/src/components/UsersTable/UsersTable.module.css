@@ -1,0 +1,64 @@
+.wrapper {
+  background: #fff;
+  border: 1px solid #E5EAF2;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+.tableHeader {
+  padding: 1.125rem 1.25rem;
+  border-bottom: 1px solid #EEF2F7;
+}
+
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0F2240;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  text-align: left;
+  padding: 0.6875rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.0375rem;
+  color: #8090A8;
+  background: #FAFBFD;
+  border-bottom: 1px solid #EBEFF5;
+  white-space: nowrap;
+}
+
+.td {
+  padding: 0.8125rem 1rem;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid #F0F3F8;
+}
+
+.tdName {
+  font-weight: 600;
+  color: #0F2240;
+}
+
+.rolePill {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0F2240;
+}
+
+@media (max-width: 48rem) {
+  .hideOnMobile {
+    display: none;
+  }
+}

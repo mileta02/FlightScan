@@ -21,13 +21,15 @@ client.interceptors.request.use(cfg => {
 
 function mapFlight(f) {
   return {
-    id:               f.id,
-    num:              `FS${String(f.id).padStart(3, '0')}`,
-    from:             fromApiCity(f.whereFrom),
-    to:               fromApiCity(f.whereTo),
-    date:             f.departureDate.split('T')[0],
-    stops:            f.stops,
-    free:             f.availableSeats,
+    id:                f.id,
+    num:               `FS${String(f.id).padStart(3, '0')}`,
+    from:              fromApiCity(f.whereFrom),
+    to:                fromApiCity(f.whereTo),
+    date:              f.departureDate.split('T')[0],
+    stops:             f.stops,
+    free:              f.availableSeats,
+    total:             f.totalSeats,
+    canceled:          f.isCancelled,
     isLowAvailability: f.isLowAvailability,
   }
 }
@@ -39,4 +41,13 @@ export async function searchFlights({ from, to }) {
 
   const { data } = await client.get('/api/flights', { params })
   return data.data.map(mapFlight)
+}
+
+export async function getAllFlights() {
+  const { data } = await client.get('/api/flights')
+  return data.data.map(mapFlight)
+}
+
+export async function cancelFlight(id) {
+  await client.put(`/api/flights/${id}/cancel`)
 }

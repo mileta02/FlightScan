@@ -12,6 +12,7 @@ const NAV_BY_ROLE = {
   ],
   administrator: [
     { key: 'flights', label: 'Letovi' },
+    { key: 'users', label: 'Korisnici' },
   ],
 }
 

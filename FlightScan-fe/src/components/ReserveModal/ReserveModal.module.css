@@ -160,10 +160,7 @@
 
 .errorBox {
   margin-bottom: 0.875rem;
-  padding: 0.625rem 0.875rem;
-  background: #FEECEC;
   color: #C0322B;
-  border-radius: 0.5625rem;
   font-size: 0.8125rem;
   font-weight: 500;
 }

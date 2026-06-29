@@ -48,11 +48,8 @@
 }
 
 .errorState {
-  margin-top: 1.5rem;
-  padding: 1rem 1.25rem;
-  background: #FEECEC;
+  margin-top: 1rem;
   color: #C0322B;
-  border-radius: 0.875rem;
   font-size: 0.875rem;
   font-weight: 500;
 }

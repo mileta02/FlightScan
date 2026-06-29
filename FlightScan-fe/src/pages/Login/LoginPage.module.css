@@ -142,10 +142,7 @@
 }
 
 .errorBox {
-  background: #FEECEC;
   color: #C0322B;
-  border-radius: 0.5625rem;
-  padding: 0.625rem 0.8125rem;
   font-size: 0.8125rem;
   font-weight: 500;
   margin-bottom: 0.875rem;

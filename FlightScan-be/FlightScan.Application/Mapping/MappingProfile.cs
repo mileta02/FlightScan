@@ -4,6 +4,7 @@ using FlightScan.Application.Cqrs.Commands.User;
 using FlightScan.Core.Entities;
 using FlightScan.Core.Responses.Flights;
 using FlightScan.Core.Responses.Reservations;
+using FlightScan.Core.Responses.User;
 
 namespace FlightScan.Application.Mapping
 {
@@ -13,6 +14,7 @@ namespace FlightScan.Application.Mapping
         {
             #region User
             CreateMap<CreateUserCommand, User>();
+            CreateMap<User, UserResponse>();
             #endregion
 
             #region Flight

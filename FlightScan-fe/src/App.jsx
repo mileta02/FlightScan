@@ -4,6 +4,8 @@ import LoginPage from './pages/Login/LoginPage'
 import DashboardLayout from './layouts/DashboardLayout'
 import SearchPage from './pages/Search/SearchPage'
 import MyReservationsPage from './pages/MyReservations/MyReservationsPage'
+import FlightsPage from './pages/Flights/FlightsPage'
+import UsersPage from './pages/Users/UsersPage'
 
 const DEFAULT_BY_ROLE = { agent: 'flights', visitor: 'search', administrator: 'flights' }
 
@@ -28,11 +30,11 @@ export default function App() {
           <Route element={<RequireAuth />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DashboardIndex />} />
-              <Route path="flights" element={<div></div>} />
+              <Route path="flights" element={<FlightsPage />} />
               <Route path="reservations" element={<div></div>} />
               <Route path="search" element={<SearchPage />} />
               <Route path="myreservations" element={<MyReservationsPage />} />
-              <Route path="users" element={<div></div>} />
+              <Route path="users" element={<UsersPage />} />
             </Route>
           </Route>
 

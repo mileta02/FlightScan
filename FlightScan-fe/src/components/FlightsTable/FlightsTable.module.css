@@ -1,0 +1,187 @@
+.wrapper {
+  background: #fff;
+  border: 1px solid #E5EAF2;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem 1.25rem;
+  border-bottom: 1px solid #EEF2F7;
+}
+
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0F2240;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.legendDot {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  border-radius: 0.25rem;
+  background: #FFEAE0;
+  border: 1px solid #F6C9B6;
+  flex-shrink: 0;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  text-align: left;
+  padding: 0.6875rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.0375rem;
+  color: #8090A8;
+  background: #FAFBFD;
+  border-bottom: 1px solid #EBEFF5;
+  white-space: nowrap;
+}
+
+.thRight {
+  text-align: right;
+}
+
+.td {
+  padding: 0.8125rem 1rem;
+  font-size: 0.8125rem;
+  color: #2A3A54;
+  border-bottom: 1px solid #F0F3F8;
+  white-space: nowrap;
+}
+
+.tdMono {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #54637C;
+}
+
+.tdRight {
+  text-align: right;
+}
+
+.routeCodes {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.routeCode {
+  font-weight: 700;
+  color: #0F2240;
+}
+
+.routeArrow {
+  color: #B6C0D0;
+}
+
+.routeSub {
+  font-size: 0.71875rem;
+  color: #8B98AC;
+  margin-top: 0.125rem;
+}
+
+.rowLow {
+  background: #FFF6F2;
+}
+
+.rowCanceled {
+  background: #FFF4F4;
+}
+
+.seats {
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #0F2240;
+}
+
+.seatsLow {
+  color: #E0552B;
+}
+
+.seatsCanceled {
+  color: #94A3B8;
+}
+
+.seatsTotal {
+  color: #A6B1C2;
+  font-size: 0.75rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 62.5rem;
+  font-size: 0.71875rem;
+  font-weight: 700;
+}
+
+.pillActive {
+  color: #0E9F6E;
+  background: #E3F6EE;
+}
+
+.pillLow {
+  color: #C2410C;
+  background: #FFEAE0;
+}
+
+.pillCanceled {
+  color: #64748B;
+  background: #EEF1F6;
+}
+
+.cancelBtn {
+  background: #fff;
+  color: #DC2626;
+  border: 1px solid #F3C9C9;
+  padding: 0.4375rem 0.875rem;
+  border-radius: 0.4375rem;
+  font-size: 0.78125rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.cancelBtn:hover:not(:disabled) {
+  background: #FEF2F2;
+}
+
+.cancelBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (max-width: 48rem) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .tableHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
