@@ -35,6 +35,17 @@
   color: #FF6A3D;
 }
 
+.badgeCancelled {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.cardCancelled {
+  background: #F4F6FA;
+  border-color: #D8DFE9;
+}
+
 
 .route {
   font-family: 'Space Grotesk', sans-serif;

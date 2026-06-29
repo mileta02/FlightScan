@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './AddFlightForm.module.css'
 
 const DEFAULT_CITIES = ['Beograd', 'Niš', 'Kraljevo']
@@ -14,7 +14,7 @@ function validate(from, to, date, seats) {
   return null
 }
 
-export default function AddFlightForm({ onSubmit = () => {}, cities = DEFAULT_CITIES }) {
+export default function AddFlightForm({ onSubmit = () => {}, cities = DEFAULT_CITIES, resetTrigger = 0 }) {
   const [from,  setFrom]  = useState(cities[0])
   const [to,    setTo]    = useState(cities[1])
   const [date,  setDate]  = useState('')
@@ -22,16 +22,21 @@ export default function AddFlightForm({ onSubmit = () => {}, cities = DEFAULT_CI
   const [seats, setSeats] = useState('')
   const [error, setError] = useState(null)
 
-  function handleSubmit() {
-    const err = validate(from, to, date, seats)
-    if (err) { setError(err); return }
-    setError(null)
-    onSubmit({ from, to, date, stops: parseInt(stops, 10), seats: parseInt(seats, 10) })
+  useEffect(() => {
+    if (resetTrigger === 0) return
     setFrom(cities[0])
     setTo(cities[1])
     setDate('')
     setStops('0')
     setSeats('')
+    setError(null)
+  }, [resetTrigger])
+
+  function handleSubmit() {
+    const err = validate(from, to, date, seats)
+    if (err) { setError(err); return }
+    setError(null)
+    onSubmit({ from, to, date, stops: parseInt(stops, 10), seats: parseInt(seats, 10) })
   }
 
   return (

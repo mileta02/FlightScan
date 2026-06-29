@@ -51,7 +51,7 @@ export default function SearchPage() {
         <div className={styles.errorState}>{error}</div>
       )}
 
-      {searched && !loading && !error && results.length === 0 && (
+      {searched && !loading && !error && allResults.length === 0 && (
         <div className={styles.emptyState}>
           Nema dostupnih letova za izabranu rutu.
         </div>

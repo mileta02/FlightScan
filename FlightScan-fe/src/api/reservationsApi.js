@@ -29,8 +29,9 @@ export function mapReservation(r) {
     to:       fromApiCity(r.whereTo),
     date:     r.departureDate.split('T')[0],
     seats:    r.reservedSeats,
-    status:   r.status?.toLowerCase() ?? 'pending',
-    username: r.username ?? null,
+    status:          r.status?.toLowerCase() ?? 'pending',
+    username:        r.username ?? null,
+    flightCancelled: r.isFlightCancelled ?? false,
   }
 }
 

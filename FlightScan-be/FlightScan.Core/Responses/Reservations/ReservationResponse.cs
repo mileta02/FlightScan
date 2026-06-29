@@ -9,6 +9,7 @@ namespace FlightScan.Core.Responses.Reservations
         public DateTime DepartureDate { get; set; }
         public int ReservedSeats { get; set; }
         public string Status { get; set; } = null!;
+        public bool IsFlightCancelled { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

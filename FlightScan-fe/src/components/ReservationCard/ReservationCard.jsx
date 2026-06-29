@@ -9,16 +9,19 @@ const formatDate = (d) => {
 }
 
 export default function ReservationCard({ reservation }) {
-  const { num, from, to, date, seats, status } = reservation
+  const { num, from, to, date, seats, status, flightCancelled } = reservation
   const approved = status === 'accepted'
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${flightCancelled ? styles.cardCancelled : ''}`}>
       <div className={styles.cardTop}>
         <span className={styles.flightNum}>{num}</span>
-        <span className={approved ? styles.badgeApproved : styles.badgePending}>
-          {approved ? 'Odobrena' : 'Na čekanju'}
-        </span>
+        {flightCancelled
+          ? <span className={styles.badgeCancelled}>Let otkazan</span>
+          : <span className={approved ? styles.badgeApproved : styles.badgePending}>
+              {approved ? 'Odobrena' : 'Na čekanju'}
+            </span>
+        }
       </div>
 
       <div className={styles.route}>

@@ -32,10 +32,11 @@ function daysUntil(date, today) {
 export default function FlightCard({
   flight,
   onReserve = () => {},
+  lowSeatThreshold = 5,
   today,
 }) {
-  const { num, from, to, date, stops, free, isLowAvailability } = flight
-  const low = isLowAvailability
+  const { num, from, to, date, stops, free } = flight
+  const low = free < lowSeatThreshold
   const canReserve = daysUntil(date, today) >= 3
 
   return (

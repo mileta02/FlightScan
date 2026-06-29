@@ -20,8 +20,7 @@ export default function ApprovalsTable({ reservations = [], onApprove = () => {}
 
       {empty ? (
         <div className={styles.empty}>
-          <div className={styles.emptyTitle}>Nema zahteva na čekanju</div>
-          <div className={styles.emptySub}>Nove rezervacije se pojavljuju ovde automatski.</div>
+          <div className={styles.emptyTitle}>Nema rezervacija na čekanju</div>
         </div>
       ) : (
         <div className={styles.scroll}>

@@ -33,7 +33,8 @@ namespace FlightScan.Application.Mapping
                 .ForMember(dest => dest.WhereFrom, opt => opt.MapFrom(src => src.Flight.WhereFrom.ToString()))
                 .ForMember(dest => dest.WhereTo, opt => opt.MapFrom(src => src.Flight.WhereTo.ToString()))
                 .ForMember(dest => dest.DepartureDate, opt => opt.MapFrom(src => src.Flight.DepartureDate))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest => dest.IsFlightCancelled, opt => opt.MapFrom(src => src.Flight.IsCancelled));
 
             CreateMap<Reservation, PendingReservationResponse>()
                 .ForMember(dest => dest.WhereFrom, opt => opt.MapFrom(src => src.Flight.WhereFrom.ToString()))

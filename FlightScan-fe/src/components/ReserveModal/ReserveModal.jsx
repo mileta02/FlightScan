@@ -32,7 +32,7 @@ export default function ReserveModal({ flight, onConfirm = () => {}, onClose = (
               {code(flight.from)} → {code(flight.to)}
             </div>
             <div className={styles.subtitle}>
-              {flight.from} – {flight.to} · {flight.num}
+              {/* {flight.from} – {flight.to} · {flight.num} */}
             </div>
           </div>
           <button className={styles.closeBtn} onClick={onClose}>×</button>
@@ -48,13 +48,13 @@ export default function ReserveModal({ flight, onConfirm = () => {}, onClose = (
             <span className={styles.rowValue}>{stopsLabel(flight.stops)}</span>
           </div>
 
-          <div className={styles.stepperLabel}>BROJ MESTA</div>
+          <div className={styles.stepperLabel}></div>
           <div className={styles.stepper}>
             <button className={styles.stepBtn} onClick={dec}>−</button>
             <span className={styles.stepCount}>{seats}</span>
             <button className={styles.stepBtn} onClick={inc}>+</button>
           </div>
-          <div className={styles.stepHint}>Najviše {max} slobodnih mesta</div>
+          <div className={styles.stepHint}></div>
 
           {error && <div className={styles.errorBox}>{error}</div>}
 

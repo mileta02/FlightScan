@@ -16,6 +16,7 @@ export default function FlightsPage() {
   const [loading, setLoading]               = useState(true)
   const [error, setError]                   = useState(null)
   const [formError, setFormError]           = useState(null)
+  const [formResetKey, setFormResetKey]     = useState(0)
   const [flightToCancel, setFlightToCancel] = useState(null)
   const [pendingFlight, setPendingFlight]   = useState(null)
 
@@ -37,6 +38,12 @@ export default function FlightsPage() {
     }
   }
 
+  function translateCreateError(msg) {
+    if (typeof msg !== 'string') return 'Kreiranje leta nije uspelo.'
+    if (msg.toLowerCase().includes('same route and date')) return 'Let sa ovom rutom i datumom već postoji.'
+    return 'Kreiranje leta nije uspelo.'
+  }
+
   async function handleConfirmCreate() {
     const data = pendingFlight
     setPendingFlight(null)
@@ -45,9 +52,10 @@ export default function FlightsPage() {
       await createFlight(data)
       const updated = await getAllFlights({ includeCancelled: isAdmin })
       setFlights(updated)
+      setFormResetKey(k => k + 1)
     } catch (err) {
       const msg = err.response?.data?.error ?? err.response?.data?.message
-      setFormError(typeof msg === 'string' ? msg : 'Kreiranje leta nije uspelo.')
+      setFormError(translateCreateError(msg))
     }
   }
 
@@ -66,7 +74,7 @@ export default function FlightsPage() {
       {isAgent ? (
         <div className={styles.layout}>
           <div className={styles.formCol}>
-            <AddFlightForm onSubmit={setPendingFlight} />
+            <AddFlightForm onSubmit={setPendingFlight} resetTrigger={formResetKey} />
             {formError && <div className={styles.formError}>{formError}</div>}
           </div>
           <div className={styles.tableCol}>{table}</div>
