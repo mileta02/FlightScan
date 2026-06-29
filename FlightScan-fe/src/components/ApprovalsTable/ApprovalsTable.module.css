@@ -1,0 +1,137 @@
+.wrapper {
+  background: #fff;
+  border: 1px solid #E5EAF2;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem 1.25rem;
+  border-bottom: 1px solid #EEF2F7;
+}
+
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0F2240;
+}
+
+.count {
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  text-align: left;
+  padding: 0.6875rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.0375rem;
+  color: #8090A8;
+  background: #FAFBFD;
+  border-bottom: 1px solid #EBEFF5;
+  white-space: nowrap;
+}
+
+.thRight {
+  text-align: right;
+}
+
+.td {
+  padding: 0.8125rem 1rem;
+  font-size: 0.8125rem;
+  color: #2A3A54;
+  border-bottom: 1px solid #F0F3F8;
+  white-space: nowrap;
+}
+
+.tdMono {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #54637C;
+}
+
+.tdRight {
+  text-align: right;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.routeCode {
+  font-weight: 700;
+  color: #0F2240;
+}
+
+.routeArrow {
+  color: #B6C0D0;
+}
+
+.routeSub {
+  font-size: 0.71875rem;
+  color: #8B98AC;
+  margin-top: 0.125rem;
+}
+
+.approveBtn {
+  background: #0E9F6E;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.78125rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.approveBtn:hover {
+  background: #057A55;
+}
+
+.empty {
+  padding: 3.375rem 1.25rem;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #5B6B82;
+}
+
+.emptySub {
+  font-size: 0.8125rem;
+  color: #94A3B8;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 48rem) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .tableHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

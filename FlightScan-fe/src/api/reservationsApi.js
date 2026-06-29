@@ -23,17 +23,27 @@ const fromApiCity = (c) => FROM_API[c] ?? c
 
 function mapReservation(r) {
   return {
-    id:     r.id,
-    num:    `FS${String(r.flightId).padStart(3, '0')}`,
-    from:   fromApiCity(r.whereFrom),
-    to:     fromApiCity(r.whereTo),
-    date:   r.departureDate.split('T')[0],
-    seats:  r.reservedSeats,
-    status: r.status?.toLowerCase() ?? 'pending',
+    id:       r.id,
+    num:      `FS${String(r.flightId).padStart(3, '0')}`,
+    from:     fromApiCity(r.whereFrom),
+    to:       fromApiCity(r.whereTo),
+    date:     r.departureDate.split('T')[0],
+    seats:    r.reservedSeats,
+    status:   r.status?.toLowerCase() ?? 'pending',
+    username: r.username ?? null,
   }
 }
 
 export async function getMyReservations() {
   const { data } = await client.get('/api/reservations/my')
   return data.data.map(mapReservation)
+}
+
+export async function getAllReservations() {
+  const { data } = await client.get('/api/reservations/pending')
+  return data.data.map(mapReservation)
+}
+
+export async function approveReservation(id) {
+  await client.put(`/api/reservations/${id}/approve`)
 }

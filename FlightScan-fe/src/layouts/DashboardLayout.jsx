@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Sidebar from '../components/Sidebar/Sidebar'
@@ -19,6 +20,8 @@ export default function DashboardLayout() {
   const role = auth.role?.toLowerCase() ?? 'visitor'
   const userName = auth.username ?? ''
 
+  const [pendingCount, setPendingCount] = useState(0)
+
   const segments = location.pathname.split('/')
   const activeKey = segments[segments.length - 1] || role
 
@@ -39,13 +42,14 @@ export default function DashboardLayout() {
         onNavigate={handleNavigate}
         onLogout={handleLogout}
         userName={userName}
+        pendingCount={pendingCount}
       />
       <div className={styles.content}>
         <header className={styles.header}>
           <h1 className={styles.pageTitle}>{PAGE_TITLE[activeKey] ?? ''}</h1>
         </header>
         <main className={styles.main}>
-          <Outlet />
+          <Outlet context={{ onPendingChange: setPendingCount }} />
         </main>
       </div>
     </div>

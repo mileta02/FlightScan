@@ -48,6 +48,17 @@ namespace FlightScan.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("pending")]
+        [Authorize(Roles = "Agent")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<Pagination<PendingReservationResponse>>> GetPendingReservationsAsync([FromQuery] ReservationSpecParams specParams)
+        {
+            var result = await _mediator.Send(new GetPendingReservationsQuery { Params = specParams });
+            return Ok(result);
+        }
+
         [HttpPut("{id}/approve")]
         [Authorize(Roles = "Agent")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -1,5 +1,7 @@
 using FlightScan.Core.Entities;
+using FlightScan.Core.Enums;
 using FlightScan.Core.Interfaces;
+using FlightScan.Core.Specifications;
 using FlightScan.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +36,24 @@ namespace FlightScan.Infrastructure.Data.Repository
             var items = await query
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalCount);
+        }
+
+        public async Task<(List<Reservation> Items, int TotalCount)> GetPendingAsync(ReservationSpecParams specParams)
+        {
+            var query = _dbContext.Reservations
+                .Include(r => r.Flight)
+                .Include(r => r.User)
+                .Where(r => r.Status == ReservationStatus.Pending)
+                .OrderByDescending(r => r.CreatedAt);
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((specParams.PageIndex - 1) * specParams.PageSize)
+                .Take(specParams.PageSize)
                 .ToListAsync();
 
             return (items, totalCount);

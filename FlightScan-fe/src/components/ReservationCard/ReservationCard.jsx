@@ -10,7 +10,7 @@ const formatDate = (d) => {
 
 export default function ReservationCard({ reservation }) {
   const { num, from, to, date, seats, status } = reservation
-  const approved = status === 'approved'
+  const approved = status === 'accepted'
 
   return (
     <div className={styles.card}>

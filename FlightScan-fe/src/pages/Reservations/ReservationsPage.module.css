@@ -1,0 +1,23 @@
+.state {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  color: #7E94B4;
+  font-size: 0.9375rem;
+  border: 1.5px dashed #D0DAE8;
+  border-radius: 0.875rem;
+}
+
+.stateError {
+  margin-top: 1rem;
+  color: #C0322B;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.actionError {
+  margin-top: 0.75rem;
+  color: #C0322B;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
