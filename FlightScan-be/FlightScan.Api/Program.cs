@@ -5,6 +5,8 @@ using FlightScan.Api.Hubs;
 using FlightScan.Api.Middlewares;
 using FlightScan.Api.Services;
 using FlightScan.Core.Config;
+using FlightScan.Core.Entities;
+using FlightScan.Core.Enums;
 using FlightScan.Core.Interfaces;
 using FlightScan.Infrastructure.Data;
 using FlightScan.Infrastructure.Data.Context;
@@ -101,6 +103,27 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     ));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+
+    if (!await db.Users.AnyAsync(u => u.Role == UserRole.Administrator))
+    {
+        var adminUsername = app.Configuration["Seed:AdminUsername"];
+        var adminPassword = app.Configuration["Seed:AdminPassword"];
+
+        db.Users.Add(new User
+        {
+            Username = adminUsername,
+            Password = BCrypt.Net.BCrypt.HashPassword(adminPassword),
+            Role = UserRole.Administrator
+        });
+
+        await db.SaveChangesAsync();
+    }
+}
 
 // Middlewares
 app.UseMiddleware<ErrorMiddleware>();
