@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - flightscan
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./FlightScan-be
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION}
+      - Jwt__Key=${JWT_KEY}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__ExpirationHours=${JWT_EXPIRATION_HOURS}
+      - Seed__AdminUsername=${SEED_ADMIN_USERNAME}
+      - Seed__AdminPassword=${SEED_ADMIN_PASSWORD}
+      - ASPNETCORE_ENVIRONMENT=Production
+    networks:
+      - flightscan
+
+  frontend:
+    build:
+      context: ./FlightScan-fe
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - flightscan
+
+networks:
+  flightscan:
+
+volumes:
+  mysql_data:
