@@ -8,7 +8,7 @@
         public const string usernameMaxChars = "Username cannot exceed 50 characters.";
         public const string usernameExists = "User with provided username already exist.";
         public const string passwordRequired = "Password is required.";
-        public const string passwordMinChars = "Password must be at least 6 characters.";
+        public const string passwordMinChars = "Password must be at least 8 characters.";
         public const string passwordMaxChars = "Password cannot exceed 50 characters.";
         public const string roleInvalid = "Invalid role provided.";
         public const string administratorRoleInvalid = "Cannot create user with administrator role.";

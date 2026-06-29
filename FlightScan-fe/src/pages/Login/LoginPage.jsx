@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { login } from '../api/authApi'
-import { useAuth } from '../context/AuthContext'
+import { Navigate } from 'react-router-dom'
+import { login } from '../../api/authApi'
+import { useAuth } from '../../context/AuthContext'
 import styles from './LoginPage.module.css'
 
 export default function LoginPage() {
@@ -10,18 +10,30 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const { saveAuth } = useAuth()
-  const navigate = useNavigate()
+  const { auth, saveAuth } = useAuth()
+
+  if (auth) return <Navigate to="/dashboard" replace />
+
+  function validate() {
+    if (!username) return 'Korisničko ime je obavezno.'
+    if (username.length < 8) return 'Korisničko ime mora imati najmanje 8 karaktera.'
+    if (username.length > 50) return 'Korisničko ime može imati najviše 50 karaktera.'
+    if (!password) return 'Lozinka je obavezna.'
+    if (password.length < 8) return 'Lozinka mora imati najmanje 8 karaktera.'
+    if (password.length > 50) return 'Lozinka može imati najviše 50 karaktera.'
+    return null
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const validationError = validate()
+    if (validationError) { setError(validationError); return }
     setError('')
     setLoading(true)
 
     try {
       const data = await login(username, password)
       saveAuth(data)
-      navigate('/welcome-page')
     } catch (err) {
       const msg = err.response?.data?.message ?? err.response?.data
       setError(typeof msg === 'string' ? msg : 'Pogrešno korisničko ime ili lozinka.')

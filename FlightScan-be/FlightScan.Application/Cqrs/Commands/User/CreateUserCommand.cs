@@ -31,7 +31,7 @@ namespace FlightScan.Application.Cqrs.Commands.User
 
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage(ValidationMessages.passwordRequired)
-                .MinimumLength(6).WithMessage(ValidationMessages.passwordMinChars)
+                .MinimumLength(8).WithMessage(ValidationMessages.passwordMinChars)
                 .MaximumLength(50).WithMessage(ValidationMessages.passwordMaxChars);
 
             RuleFor(x => x.Role)
