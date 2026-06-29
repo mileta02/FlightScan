@@ -16,24 +16,21 @@ export default function ReservationsPage() {
 
   useEffect(() => {
     getAllReservations()
-      .then(data => {
-        setReservations(data)
-        onPendingChange?.(data.length)
-      })
+      .then(setReservations)
       .catch(() => setLoadError('Greška pri učitavanju rezervacija.'))
       .finally(() => setLoading(false))
   }, [])
+
+  useEffect(() => {
+    onPendingChange?.(reservations.length)
+  }, [reservations.length])
 
   useEffect(() => {
     if (!connection) return
 
     function handleNewReservation(data) {
       const mapped = mapReservation(data)
-      setReservations(prev => {
-        const updated = [mapped, ...prev]
-        onPendingChange?.(updated.length)
-        return updated
-      })
+      setReservations(prev => [mapped, ...prev])
     }
 
     connection.on('NewReservation', handleNewReservation)
@@ -48,11 +45,7 @@ export default function ReservationsPage() {
     setActionError(null)
     try {
       await approveReservation(r.id)
-      setReservations(prev => {
-        const updated = prev.filter(x => x.id !== r.id)
-        onPendingChange?.(updated.length)
-        return updated
-      })
+      setReservations(prev => prev.filter(x => x.id !== r.id))
     } catch {
       setActionError('Odobravanje rezervacije nije uspelo.')
     }

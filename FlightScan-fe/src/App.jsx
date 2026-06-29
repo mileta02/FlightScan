@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useOutletContext } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import LoginPage from './pages/Login/LoginPage'
 import DashboardLayout from './layouts/DashboardLayout'
@@ -18,8 +18,9 @@ function RequireAuth() {
 function RequireRole({ allowed }) {
   const { auth } = useAuth()
   const role = auth?.role?.toLowerCase() ?? 'visitor'
+  const ctx = useOutletContext()
   return allowed.includes(role)
-    ? <Outlet />
+    ? <Outlet context={ctx} />
     : <Navigate to={`/dashboard/${DEFAULT_BY_ROLE[role] ?? 'search'}`} replace />
 }
 
