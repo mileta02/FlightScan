@@ -1,0 +1,14 @@
+.emptyState {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  color: #7E94B4;
+  font-size: 0.9375rem;
+  border: 1.5px dashed #D0DAE8;
+  border-radius: 0.875rem;
+}
+
+.emptyState strong {
+  color: #FF6A3D;
+  font-weight: 700;
+}

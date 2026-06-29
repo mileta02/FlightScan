@@ -1,6 +1,15 @@
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/Sidebar/Sidebar'
+import styles from './DashboardLayout.module.css'
+
+const PAGE_TITLE = {
+  flights: 'Letovi',
+  reservations: 'Rezervacije',
+  search: 'Pretraga letova',
+  myreservations: 'Moje rezervacije',
+  users: 'Korisnici',
+}
 
 export default function DashboardLayout() {
   const { auth, logout } = useAuth()
@@ -23,7 +32,7 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div className={styles.shell}>
       <Sidebar
         role={role}
         activeKey={activeKey}
@@ -31,9 +40,14 @@ export default function DashboardLayout() {
         onLogout={handleLogout}
         userName={userName}
       />
-      <main style={{ flex: 1, background: '#F4F7FB', overflow: 'auto' }}>
-        <Outlet />
-      </main>
+      <div className={styles.content}>
+        <header className={styles.header}>
+          <h1 className={styles.pageTitle}>{PAGE_TITLE[activeKey] ?? ''}</h1>
+        </header>
+        <main className={styles.main}>
+          <Outlet />
+        </main>
+      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { AuthProvider, useAuth } from './context/AuthContext'
 import LoginPage from './pages/Login/LoginPage'
 import DashboardLayout from './layouts/DashboardLayout'
+import SearchPage from './pages/Search/SearchPage'
 
 const DEFAULT_BY_ROLE = { agent: 'flights', visitor: 'search', administrator: 'flights' }
 
@@ -28,7 +29,7 @@ export default function App() {
               <Route index element={<DashboardIndex />} />
               <Route path="flights" element={<div></div>} />
               <Route path="reservations" element={<div></div>} />
-              <Route path="search" element={<div></div>} />
+              <Route path="search" element={<SearchPage />} />
               <Route path="myreservations" element={<div></div>} />
               <Route path="users" element={<div></div>} />
             </Route>
