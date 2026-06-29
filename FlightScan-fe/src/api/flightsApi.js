@@ -43,11 +43,24 @@ export async function searchFlights({ from, to }) {
   return data.data.map(mapFlight)
 }
 
-export async function getAllFlights() {
-  const { data } = await client.get('/api/flights')
+export async function getAllFlights({ includeCancelled = true } = {}) {
+  const params = {}
+  if (!includeCancelled) params.IsCancelled = false
+  const { data } = await client.get('/api/flights', { params })
   return data.data.map(mapFlight)
 }
 
 export async function cancelFlight(id) {
   await client.put(`/api/flights/${id}/cancel`)
+}
+
+export async function createFlight({ from, to, date, stops, seats }) {
+  const { data } = await client.post('/api/flights', {
+    WhereFrom:     toApiCity(from),
+    WhereTo:       toApiCity(to),
+    DepartureDate: `${date}T00:00:00`,
+    Stops:         stops,
+    TotalSeats:    seats,
+  })
+  return data
 }

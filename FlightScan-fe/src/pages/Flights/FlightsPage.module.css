@@ -1,3 +1,33 @@
+.layout {
+  display: grid;
+  grid-template-columns: 22rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.formCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tableCol {
+  min-width: 0;
+}
+
+.formError {
+  color: #C0322B;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: 'Hanken Grotesk', -apple-system, sans-serif;
+}
+
+@media (max-width: 56rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .state {
   margin-top: 1.5rem;
   padding: 2rem;

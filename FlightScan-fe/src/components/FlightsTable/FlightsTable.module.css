@@ -103,11 +103,12 @@
 }
 
 .rowLow {
-  background: #FFF6F2;
+  background: #f9ddd6;
+  box-shadow: inset 3px 0 0 #E0552B;
 }
 
 .rowCanceled {
-  background: #FFF4F4;
+  background: #c75c5c;
 }
 
 .seats {
@@ -121,12 +122,13 @@
 }
 
 .seatsCanceled {
-  color: #94A3B8;
+  color: #0F2240;
 }
 
 .seatsTotal {
-  color: #A6B1C2;
-  font-size: 0.75rem;
+  color: #0F2240;
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .pill {

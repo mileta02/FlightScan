@@ -61,7 +61,8 @@ namespace FlightScan.Infrastructure.Data.Repository
             return await _dbContext.Flights.AnyAsync(f =>
                 f.WhereFrom == whereFrom &&
                 f.WhereTo == whereTo &&
-                f.DepartureDate.Date == departureDate.Date);
+                f.DepartureDate.Date == departureDate.Date &&
+                !f.IsCancelled);
         }
     }
 }
