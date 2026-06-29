@@ -10,11 +10,13 @@ namespace FlightScan.Application.Handlers.Reservation
     {
         private readonly IReservationRepository _reservationRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IReservationNotificationService _notifications;
 
-        public ApproveReservationHandler(IReservationRepository reservationRepository, IUnitOfWork unitOfWork)
+        public ApproveReservationHandler(IReservationRepository reservationRepository, IUnitOfWork unitOfWork, IReservationNotificationService notifications)
         {
             _reservationRepository = reservationRepository;
             _unitOfWork = unitOfWork;
+            _notifications = notifications;
         }
 
         public async Task<Unit> Handle(ApproveReservationCommand request, CancellationToken cancellationToken)
@@ -26,6 +28,8 @@ namespace FlightScan.Application.Handlers.Reservation
 
             reservation.Status = ReservationStatus.Accepted;
             await _unitOfWork.SaveChangesAsync();
+
+            await _notifications.NotifyReservationApprovedAsync(reservation.Id, reservation.UserId);
 
             return Unit.Value;
         }

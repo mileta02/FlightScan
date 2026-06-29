@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import ApprovalsTable from '../../components/ApprovalsTable/ApprovalsTable'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
-import { getAllReservations, approveReservation } from '../../api/reservationsApi'
+import { getAllReservations, approveReservation, mapReservation } from '../../api/reservationsApi'
 import styles from './ReservationsPage.module.css'
 
 export default function ReservationsPage() {
-  const { onPendingChange } = useOutletContext() ?? {}
+  const { onPendingChange, connection } = useOutletContext() ?? {}
 
   const [reservations, setReservations] = useState([])
   const [loading, setLoading]           = useState(true)
@@ -23,6 +23,24 @@ export default function ReservationsPage() {
       .catch(() => setLoadError('Greška pri učitavanju rezervacija.'))
       .finally(() => setLoading(false))
   }, [])
+
+  useEffect(() => {
+    if (!connection) return
+
+    function handleNewReservation(data) {
+      const mapped = mapReservation(data)
+      setReservations(prev => {
+        const updated = [mapped, ...prev]
+        onPendingChange?.(updated.length)
+        return updated
+      })
+    }
+
+    connection.on('NewReservation', handleNewReservation)
+    return () => {
+      connection.off('NewReservation', handleNewReservation)
+    }
+  }, [connection])
 
   async function handleConfirmApprove() {
     const r = toApprove

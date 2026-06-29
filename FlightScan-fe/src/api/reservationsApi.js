@@ -21,7 +21,7 @@ export async function createReservation(flightId, seatsCount) {
 const FROM_API = { 'Nis': 'Niš' }
 const fromApiCity = (c) => FROM_API[c] ?? c
 
-function mapReservation(r) {
+export function mapReservation(r) {
   return {
     id:       r.id,
     num:      `FS${String(r.flightId).padStart(3, '0')}`,

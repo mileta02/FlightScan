@@ -33,8 +33,13 @@ namespace FlightScan.Infrastructure.Data.Repository
             return (items, totalCount);
         }
 
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User?> GetByUsernameAsync(string username)
-        { 
+        {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
         } 
     }

@@ -1,7 +1,9 @@
 using FlightScan.Application.Behaviours;
 using FlightScan.Application.Cqrs.Commands.Auth;
 using FlightScan.Application.Handlers.Auth;
+using FlightScan.Api.Hubs;
 using FlightScan.Api.Middlewares;
+using FlightScan.Api.Services;
 using FlightScan.Core.Config;
 using FlightScan.Core.Interfaces;
 using FlightScan.Infrastructure.Data;
@@ -11,6 +13,7 @@ using FlightScan.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -24,7 +27,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
         policy.WithOrigins("http://localhost:5173")
               .AllowAnyHeader()
-              .AllowAnyMethod());
+              .AllowAnyMethod()
+              .AllowCredentials());
 });
 
 builder.Services.AddControllers()
@@ -50,6 +54,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = ctx =>
+            {
+                var token = ctx.Request.Query["access_token"];
+                if (!string.IsNullOrEmpty(token) &&
+                    ctx.HttpContext.Request.Path.StartsWithSegments("/hubs/flight"))
+                    ctx.Token = token;
+                return Task.CompletedTask;
+            }
+        };
     });
 
 // MediatR
@@ -66,6 +81,11 @@ builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// SignalR
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
+builder.Services.AddScoped<IReservationNotificationService, ReservationNotificationService>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(cfg =>
@@ -102,5 +122,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<FlightHub>("/hubs/flight");
 
 app.Run();

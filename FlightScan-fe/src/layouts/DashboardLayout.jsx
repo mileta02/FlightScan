@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Sidebar from '../components/Sidebar/Sidebar'
+import { createConnection } from '../api/signalrApi'
 import styles from './DashboardLayout.module.css'
 
 const PAGE_TITLE = {
@@ -21,6 +22,16 @@ export default function DashboardLayout() {
   const userName = auth.username ?? ''
 
   const [pendingCount, setPendingCount] = useState(0)
+  const [connection, setConnection] = useState(null)
+
+  useEffect(() => {
+    const conn = createConnection()
+    setConnection(conn)
+    conn.start().catch(console.error)
+    return () => {
+      conn.stop()
+    }
+  }, [])
 
   const segments = location.pathname.split('/')
   const activeKey = segments[segments.length - 1] || role
@@ -49,7 +60,7 @@ export default function DashboardLayout() {
           <h1 className={styles.pageTitle}>{PAGE_TITLE[activeKey] ?? ''}</h1>
         </header>
         <main className={styles.main}>
-          <Outlet context={{ onPendingChange: setPendingCount }} />
+          <Outlet context={{ onPendingChange: setPendingCount, connection }} />
         </main>
       </div>
     </div>
