@@ -55,7 +55,7 @@ To get started:
 | ADMIN_PASSWORD | administrator | *(min 8 chars)* |
 | JWT_KEY | *(set a secure key, e.g. flightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscan)* | *(min 64 chars)* |
 | MYSQL_DATABASE | flightscan_db ||
-| DB_PASSWORD | root ||
+| DB_PASSWORD | root | * (used for both MYSQL_ROOT_PASSWORD and DB connection (Password field))* |
 
 > **Note:** The `.env` file is not included in the repository. Copy `.env.example` to `.env` and adjust the values before starting the application.
 
