@@ -9,10 +9,11 @@ services:
     networks:
       - flightscan
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD", "mysql", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "${MYSQL_DATABASE}", "-e", "SELECT 1"]
       interval: 5s
       timeout: 5s
       retries: 10
+      start_period: 15s
 
   backend:
     build:

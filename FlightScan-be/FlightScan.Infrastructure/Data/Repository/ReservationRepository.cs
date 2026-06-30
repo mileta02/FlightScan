@@ -46,7 +46,7 @@ namespace FlightScan.Infrastructure.Data.Repository
             var query = _dbContext.Reservations
                 .Include(r => r.Flight)
                 .Include(r => r.User)
-                .Where(r => r.Status == ReservationStatus.Pending)
+                .Where(r => r.Status == ReservationStatus.Pending && !r.Flight.IsCancelled)
                 .OrderByDescending(r => r.CreatedAt);
 
             var totalCount = await query.CountAsync();
