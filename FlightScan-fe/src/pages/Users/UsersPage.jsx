@@ -11,6 +11,13 @@ export default function UsersPage() {
   const [error, setError]         = useState(null)
   const [formError, setFormError] = useState(null)
   const [pending, setPending]     = useState(null)
+  const [toast, setToast]         = useState(false)
+
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(false), 3000)
+    return () => clearTimeout(t)
+  }, [toast])
 
   useEffect(() => {
     getUsers()
@@ -27,6 +34,7 @@ export default function UsersPage() {
       await createUser(data)
       const updated = await getUsers()
       setUsers(updated)
+      setToast(true)
     } catch (err) {
       const msg = err.response?.data?.error ?? err.response?.data?.message
       setFormError(typeof msg === 'string' ? msg : 'Dodavanje korisnika nije uspelo.')
@@ -47,6 +55,8 @@ export default function UsersPage() {
         {!loading && !error && <UsersTable users={users} />}
       </div>
     </div>
+
+    {toast && <div className={styles.toast}>Korisnik je uspešno dodat.</div>}
 
     <ConfirmModal
       title="Dodaj korisnika?"

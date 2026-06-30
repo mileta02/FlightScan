@@ -19,6 +19,13 @@ export default function FlightsPage() {
   const [formResetKey, setFormResetKey]     = useState(0)
   const [flightToCancel, setFlightToCancel] = useState(null)
   const [pendingFlight, setPendingFlight]   = useState(null)
+  const [toast, setToast]                   = useState(false)
+
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(false), 3000)
+    return () => clearTimeout(t)
+  }, [toast])
 
   useEffect(() => {
     getAllFlights({ includeCancelled: isAdmin })
@@ -53,6 +60,7 @@ export default function FlightsPage() {
       const updated = await getAllFlights({ includeCancelled: isAdmin })
       setFlights(updated)
       setFormResetKey(k => k + 1)
+      setToast(true)
     } catch (err) {
       const msg = err.response?.data?.error ?? err.response?.data?.message
       setFormError(translateCreateError(msg))
@@ -82,6 +90,8 @@ export default function FlightsPage() {
       ) : (
         table
       )}
+
+      {toast && <div className={styles.toast}>Let je uspešno kreiran.</div>}
 
       <ConfirmModal
         title="Otkaži let?"

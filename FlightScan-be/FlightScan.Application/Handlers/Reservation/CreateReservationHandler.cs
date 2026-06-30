@@ -32,7 +32,7 @@ namespace FlightScan.Application.Handlers.Reservation
             if (flight!.IsCancelled)
                 throw new BadRequestException("Cannot reserve a cancelled flight.");
 
-            if (flight.DepartureDate <= DateTime.UtcNow.AddDays(3))
+            if (flight.DepartureDate.Date < DateTime.UtcNow.Date.AddDays(3))
                 throw new BadRequestException("Cannot reserve a flight departing in less than 3 days.");
 
             if (flight.AvailableSeats < request.SeatsCount)

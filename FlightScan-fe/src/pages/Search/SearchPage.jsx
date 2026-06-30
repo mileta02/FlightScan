@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FlightSearch from '../../components/FlightSearch/FlightSearch'
 import FlightCard from '../../components/FlightCard/FlightCard'
 import ReserveModal from '../../components/ReserveModal/ReserveModal'
@@ -16,6 +16,13 @@ export default function SearchPage() {
   const [searched, setSearched] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [toast, setToast] = useState(false)
+
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(false), 3000)
+    return () => clearTimeout(t)
+  }, [toast])
 
   const results = directOnly ? allResults.filter(f => f.stops === 0) : allResults
 
@@ -83,6 +90,8 @@ export default function SearchPage() {
       )}
     </div>
 
+    {toast && <div className={styles.toast}>Rezervacija je uspešno kreirana.</div>}
+
     <ReserveModal
       flight={activeFlight}
       onClose={() => { setActiveFlight(null); setReserveError(null) }}
@@ -92,6 +101,7 @@ export default function SearchPage() {
         try {
           await createReservation(flight.id, seats)
           setActiveFlight(null)
+          setToast(true)
           const refreshed = await searchFlights(search)
           setAllResults(refreshed)
         } catch (err) {
