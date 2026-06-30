@@ -2,11 +2,11 @@ namespace FlightScan.Core.Specifications
 {
     public class BaseSpecParams
     {
-        private const int MaxPageSize = 100;
+        private const int MaxPageSize = 150;
 
         public int PageIndex { get; set; } = 1;
 
-        private int _pageSize = 25;
+        private int _pageSize = 150;
         public int PageSize
         {
             get => _pageSize;
