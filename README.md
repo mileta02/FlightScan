@@ -53,8 +53,10 @@ To get started:
 |---|---|---|
 | ADMIN_USERNAME | administrator | *(min 8 chars)* |
 | ADMIN_PASSWORD | administrator | *(min 8 chars)* |
-| JWT_KEY | *(set a secure key, e.g. flightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscan)* ||
+| JWT_KEY | *(set a secure key, e.g. flightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscanflightscan)* | *(min 64 chars)* |
 | DB_PASSWORD | root ||
+
+> **Note:** The `.env` file is not included in the repository. Copy `.env.example` to `.env` and adjust the values before starting the application.
 
 ## Resetting the application
 
@@ -66,5 +68,3 @@ docker-compose up --build
 ```
 
 > **Warning:** This will delete all data including users, flights and reservations.
-
-> **Note:** The `.env` file is not included in the repository. Copy `.env.example` to `.env` and adjust the values before starting the application.
